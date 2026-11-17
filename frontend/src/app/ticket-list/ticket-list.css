@@ -1,0 +1,64 @@
+section {
+ margin-bottom: 2rem;
+}
+.new-ticket {
+ display: flex;
+ flex-wrap: wrap;
+ gap: 0.5rem;
+}
+.new-ticket input {
+ flex: 1 1 14rem;
+}
+input,
+select,
+button {
+ padding: 0.45rem 0.6rem;
+ font: inherit;
+}
+.toolbar {
+ display: flex;
+ justify-content: space-between;
+ align-items: center;
+ flex-wrap: wrap;
+ gap: 0.5rem;
+}
+table {
+ width: 100%;
+ border-collapse: collapse;
+}
+th,
+td {
+ text-align: left;
+ padding: 0.5rem;
+ border-bottom: 1px solid #ddd;
+ vertical-align: top;
+}
+.desc {
+ color: #555;
+ font-size: 0.9rem;
+}
+.error {
+ color: #b00020;
+ font-weight: 600;
+}
+.empty {
+ color: #666;
+ }
+.badge {
+ padding: 0.15rem 0.5rem;
+ border-radius: 0.75rem;
+ font-size: 0.8rem;
+ background: #eee;
+}
+.badge.high {
+ background: #ffe0b2;
+}
+.badge.critical {
+ background: #ffcdd2;
+}
+.badge.low {
+ background: #e0f2f1;
+}
+.danger {
+ color: #b00020;
+}

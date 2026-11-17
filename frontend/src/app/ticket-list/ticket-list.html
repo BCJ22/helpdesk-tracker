@@ -1,0 +1,76 @@
+<section>
+ <h2>New ticket</h2>
+ <form class="new-ticket" (ngSubmit)="add()">
+ <input name="title" [(ngModel)]="title" placeholder="Title" maxlength="120" required />
+ <input
+ name="description"
+ [(ngModel)]="description"
+ placeholder="Description"
+ maxlength="2000"
+ />
+ <select name="priority" [(ngModel)]="priority">
+ @for (p of priorities; track p) {
+ <option [value]="p">{{ p }}</option>
+ }
+ </select>
+ <button type="submit" [disabled]="!title().trim()">Add ticket</button>
+ </form>
+</section>
+<section>
+ <div class="toolbar">
+ <h2>Tickets ({{ tickets().length }})</h2>
+ <label>
+ Filter by status
+ <select [ngModel]="filter()" (ngModelChange)="setFilter($event)">
+ <option value="">All</option>
+ @for (s of statuses; track s) {
+ <option [value]="s">{{ s }}</option>
+ }
+ </select>
+ </label>
+ </div>
+ @if (error()) {
+ <p class="error">{{ error() }}</p>
+ }
+ @if (tickets().length === 0 && !error()) {
+ <p class="empty">No tickets yet. Add one above.</p>
+ } @else {
+ <table>
+ <thead>
+ <tr>
+ <th>ID</th>
+ <th>Title</th>
+ <th>Priority</th>
+ <th>Status</th>
+ <th>Created</th>
+ <th></th>
+ </tr>
+ </thead>
+ <tbody>
+ @for (t of tickets(); track t.id) {
+ <tr>
+ <td>{{ t.id }}</td>
+ <td>
+ <strong>{{ t.title }}</strong>
+ @if (t.description) {
+ <div class="desc">{{ t.description }}</div>
+ }
+ </td>
+ <td>
+ <span [class]="'badge ' + t.priority.toLowerCase()">{{ t.priority }}</span>
+ </td>
+ <td>
+ <select [ngModel]="t.status" (ngModelChange)="changeStatus(t, $event)">
+ @for (s of statuses; track s) {
+ <option [value]="s">{{ s }}</option>
+ }
+ </select>
+ </td>
+ <td>{{ t.createdAt | date: 'short' }}</td>
+ <td><button type="button" class="danger" (click)="remove(t)">Delete</button></td>
+ </tr>
+ }
+ </tbody>
+ </table>
+ }
+</section>
